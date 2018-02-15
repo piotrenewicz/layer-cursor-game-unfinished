@@ -109,9 +109,8 @@ class LayerHolder extends Block{
   int l;
   Body Holder;
   
-  void CR(){
-    BodyDef HolderDef = new BodyDef();  
-  
+  void DE(){
+    box2d.destroyBody(Holder);
   }
   
   LayerHolder(String attribs[][]){
@@ -133,6 +132,11 @@ class LayerHolder extends Block{
   }
   
   void MU(){
+    BodyDef HolderDef = new BodyDef();
+    HolderDef.type = BodyType.DYNAMIC;
+    Vec2 spawn = new Vec2(screenX(0,0),screenY(0,0));
+    HolderDef.position.set(box2d.coordPixelsToWorld(spawn));
+    
     mM.stages[mM.currentStage].layers.get(l).MU();   //whoah complex,,   mapManager. from all the stages, choose the currentStage, and from layers in that stage .get the one I'm hosting (l), and tell it to MachineUpdate();
   }
 }

@@ -21,6 +21,7 @@ mapManager mM = new mapManager();
 
 
 void draw(){
+  box2d.step();
   background(0);
   cloneSystem();
   mM.MU();
