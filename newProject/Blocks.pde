@@ -7,11 +7,14 @@ class Block{
   
   void SetAttribs(String attribs[][]){
     for(String value[] : attribs){
-      switch(value[0]){
-        case "x":
+      switch(switchUtil(value[0], new String[]{
+        "x", //0
+        "y"  //1
+      })){
+        case 0:
           x=int(value[1]);
           break;
-        case "y":
+        case 1:
           y=int(value[1]);
           break;
       }
@@ -46,29 +49,38 @@ class Plane extends Block{
   
   void SetAttribs(String attribs[][]){//this overload will be the thing that is supposed to be run and will implement attribs;
     for(String value[] : attribs){
-      switch(value[0]){
-        case "x2":
+      switch(switchUtil(value[0], new String[]{
+        "x2", //0
+        "y2", //1
+        "T" , //2
+        "R" , //3
+        "G" , //4
+        "B" , //5
+        "C"   //6
+       
+      })){
+        case 0:
           x2=int(value[1]);
           break;
-        case "y2":
+        case 1:
           y2=int(value[1]);
           break;
-        case "T":
+        case 2:
           transparency=int(value[1]);
           break;
-        case "R":
+        case 3:
           R=int(value[1]);
           c=color(R,G,B);
           break;
-        case "G":
+        case 4:
           G=int(value[1]);
           c=color(R,G,B);
           break;
-        case "B":
+        case 5:
           B=int(value[1]);
           c=color(R,G,B);
           break;
-        case "C":
+        case 6:
           R=int(value[1]);
           G=int(value[2]);
           B=int(value[3]);
@@ -119,8 +131,10 @@ class LayerHolder extends Block{
   
   void SetAttribs(String attribs[][]){//LOOK for l;
     for(String value[] : attribs){
-      switch(value[0]){
-        case "l":
+      switch(switchUtil(value[0], new String[]{
+      "l" //0
+      })){
+        case 0:
           l=int(value[1]);
           break;
         
@@ -158,20 +172,27 @@ class Slider extends LayerHolder{
   
   void SetAttribs(String attribs[][]){
     for(String value[] : attribs){
-      switch(value[0]){
-        case "x2":
+      switch(switchUtil(value[0], new String[]{
+        "x2", //0
+        "y2", //1
+        "f" , //2
+        "s" , //3
+        "%"   //4
+      
+      })){
+        case 0:
           x2=int(value[1]);
           break;
-        case "y2":
+        case 1:
           y2=int(value[1]);
           break;
-        case "f":
+        case 2:
           f=float(value[1]);
           break;
-        case "s":
+        case 3:
           s=boolean(int(value[1]));
           break;
-        case "%":
+        case 4:
           p=int(value[1]);
           break;
         
@@ -203,14 +224,19 @@ class Rotor extends LayerHolder{
   
   void SetAttribs(String attribs[][]){
     for(String value[] : attribs){
-      switch(value[0]){
-        case "f":
+      switch(switchUtil(value[0], new String[]{
+        "f", //0
+        "s", //1
+        "%"  //2
+      
+      })){
+        case 0:
           f=float(value[1]);
           break;
-        case "s":
+        case 1:
           s=boolean(int(value[1]));
           break;
-        case "%":
+        case 2:
           p=int(value[1]);
           break;
       }

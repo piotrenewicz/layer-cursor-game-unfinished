@@ -7,7 +7,7 @@ import java.util.Map;
 Box2DProcessing box2d;
 
 void setup(){
-  size(700, 700);
+  //size(700, 700);
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
   box2d.setGravity(0,0);
@@ -33,7 +33,14 @@ void draw(){
 
 
 
-
+int switchUtil(String data, String[] cases){
+  for(int i=0; i<cases.length; i++){
+    if(data.equals(cases[i])){
+      return i;
+    }
+  }
+  return -1;
+}
 
 
 
