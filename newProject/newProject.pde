@@ -34,7 +34,8 @@ void draw(){
 
 
 
-
+// idea here,,,  float joint.  A block that has a layer holder, but doesn't restrict it's movement (optionally does friction). 
+// (forces don't translate through that joint, they just move the holder around/// or with friction, they go through at the factor of friction, and the rest just moves the holder)
 
 
 

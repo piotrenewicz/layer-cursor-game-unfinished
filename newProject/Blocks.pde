@@ -132,12 +132,17 @@ class LayerHolder extends Block{
   }
   
   void MU(){
+    mM.stages[mM.currentStage].layers.get(l).MU();   //whoah complex,,   mapManager. from all the stages, choose the currentStage, and from layers in that stage .get the one I'm hosting (l), and tell it to MachineUpdate();
+  }
+  
+  void CR(){
     BodyDef HolderDef = new BodyDef();
     HolderDef.type = BodyType.DYNAMIC;
     Vec2 spawn = new Vec2(screenX(0,0),screenY(0,0));
     HolderDef.position.set(box2d.coordPixelsToWorld(spawn));
-    
-    mM.stages[mM.currentStage].layers.get(l).MU();   //whoah complex,,   mapManager. from all the stages, choose the currentStage, and from layers in that stage .get the one I'm hosting (l), and tell it to MachineUpdate();
+    Holder = box2d.createBody(HolderDef);
+    //weld joint definition here probably
+    mM.stages[mM.currentStage].layers.get(l).CR();   //whoah complex,,   mapManager. from all the stages, choose the currentStage, and from layers in that stage .get the one I'm hosting (l), and tell it to MachineUpdate();
   }
 }
 

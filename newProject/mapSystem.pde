@@ -123,9 +123,27 @@ class Layer{
     //append(blocks, new Block(blockID, attribs));  //actually that makes sense/
   }
   
+  void CR(){
+    for(int i=0; i<blocks.size(); i++){
+      pushMatrix();
+      translate(
+        blocks.get(i).x,
+        blocks.get(i).y
+      );
+      blocks.get(i).CR();
+      popMatrix();
+    }
+  }
+  
+  void DE(){
+    //when layer will get a body this will be the destructor
+  }
+  
   void MU(){
     for(int i=0; i<blocks.size(); i++){
       pushMatrix();
+      //                      translate(layerXPos, layerYPos); <--add this as soon as layer gets a body to read coordinates from.
+      //                      rotate(layerAngle);
       translate(
         blocks.get(i).x,
         blocks.get(i).y
