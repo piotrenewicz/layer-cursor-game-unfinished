@@ -22,6 +22,7 @@ class Block{
   void GU(){};
   void DE(){}; //as in destroy
   void CR(){}; //as in create  this stuff will act as accessors to our childs.
+  int AU(){return 0;} //authentication access and fail.
   
 }
 
@@ -108,10 +109,9 @@ class Spawn extends Block{
 class LayerHolder extends Block{
   int l;
   Body Holder;
+  WeldJoint LWeld;
   
-  void DE(){
-    box2d.destroyBody(Holder);
-  }
+  
   
   LayerHolder(String attribs[][]){
     SetAttribs(attribs);
@@ -131,6 +131,8 @@ class LayerHolder extends Block{
     super.SetAttribs(attribs);
   }
   
+  int AU(){return 1;}  //authenticate as a body having entity
+  
   void MU(){
     mM.stages[mM.currentStage].layers.get(l).MU();   //whoah complex,,   mapManager. from all the stages, choose the currentStage, and from layers in that stage .get the one I'm hosting (l), and tell it to MachineUpdate();
   }
@@ -141,8 +143,27 @@ class LayerHolder extends Block{
     Vec2 spawn = new Vec2(screenX(0,0),screenY(0,0));
     HolderDef.position.set(box2d.coordPixelsToWorld(spawn));
     Holder = box2d.createBody(HolderDef);
-    //weld joint definition here probably
+    
     mM.stages[mM.currentStage].layers.get(l).CR();   //whoah complex,,   mapManager. from all the stages, choose the currentStage, and from layers in that stage .get the one I'm hosting (l), and tell it to MachineUpdate();
+    
+    WeldJointDef layerWeld = new WeldJointDef();
+    layerWeld.bodyA = Holder;
+    layerWeld.bodyB = mM.stages[mM.currentStage].layers.get(l).Layer;
+    layerWeld.dampingRatio = 1;
+    layerWeld.frequencyHz = 0;
+    layerWeld.localAnchorA.set(new Vec2(0,0));
+    
+    LWeld = (WeldJoint) box2d.world.createJoint(layerWeld);
+    //weld joint definition here
+  }
+  
+  void DE(){
+    //destroy the weld
+    LWeld.destroy(LWeld);
+    
+    mM.stages[mM.currentStage].layers.get(l).DE();
+    
+    box2d.destroyBody(Holder);
   }
 }
 
@@ -182,6 +203,10 @@ class Slider extends LayerHolder{
         
       }
     }
+  }
+  
+  void CR(){
+    
   }
   
   void MU(){

@@ -92,6 +92,7 @@ class Stage{
 }
 
 class Layer{
+  Body Layer;
   ArrayList<Block> blocks = new ArrayList<Block>();    //layers will need to be smart, they will handle matrix transforms both ways, and contain logic between blocks on many layers.
   
   void addBlock(int entry, int blockID, String attribs[][]){            //blocks switch
@@ -124,6 +125,12 @@ class Layer{
   }
   
   void CR(){
+    BodyDef LayerDef = new BodyDef();
+    LayerDef.type = BodyType.DYNAMIC;
+    Vec2 spawn = new Vec2(screenX(0,0),screenY(0,0));
+    LayerDef.position.set(box2d.coordPixelsToWorld(spawn));
+    Layer = box2d.createBody(LayerDef);
+    
     for(int i=0; i<blocks.size(); i++){
       pushMatrix();
       translate(
@@ -136,6 +143,13 @@ class Layer{
   }
   
   void DE(){
+    
+    for(int i=0; i<blocks.size(); i++){
+      //here add the code to destroy welds with each block
+      blocks.get(i).DE();
+    }
+    
+    box2d.destroyBody(Layer);
     //when layer will get a body this will be the destructor
   }
   
