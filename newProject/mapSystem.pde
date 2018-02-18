@@ -139,6 +139,33 @@ class Layer{
       );
       blocks.get(i).CR();
       popMatrix();
+      
+      switch(blocks.get(i).AU()){
+        case 0:
+          print("attempted creating NULL block");
+          break;
+        case 1:
+          break;
+        case 2:
+          /*WeldJointDef  = new WeldJointDef();
+    layerWeld.bodyA = Holder;
+    layerWeld.bodyB = 
+    layerWeld.dampingRatio = 1;
+    layerWeld.frequencyHz = 0;
+    layerWeld.localAnchorA.set(new Vec2(0,0));
+    
+    LWeld = (WeldJoint) box2d.world.createJoint(layerWeld);*/
+    //weld joint definition here   //problem here, in order to weld layer to funcBlocks we will need accessors to the bodies, and that makes all blocks bodies better. so i guess blocks will weld themselfs at creation.
+    // and fixtures will need to happen same way
+    
+    //the next issue,, welding holders to layer if placed directly and not welding funcBody ends.
+          break;
+        case 3:
+          
+          break;
+      }
+      //ok here so we will need weld joints for funcBody, no box2d components for planes, and just fixtures for blockades (they will get no bodies themselfs).
+      // authentication spreaded by int AU(){} 0 - failed, 1 - plane, 2 - funcBody, 3 - blockades,
     }
   }
   

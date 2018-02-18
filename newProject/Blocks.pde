@@ -94,6 +94,8 @@ class Plane extends Block{
       rect(0,0, x2, y2);    //here we will draw the block
     popMatrix();
   }
+  
+  int AU(){return 1;}
 }
 
 class Door extends Block{
@@ -131,7 +133,7 @@ class LayerHolder extends Block{
     super.SetAttribs(attribs);
   }
   
-  int AU(){return 1;}  //authenticate as a body having entity
+  int AU(){return 2;}  //authenticate as a body having entity
   
   void MU(){
     mM.stages[mM.currentStage].layers.get(l).MU();   //whoah complex,,   mapManager. from all the stages, choose the currentStage, and from layers in that stage .get the one I'm hosting (l), and tell it to MachineUpdate();
@@ -217,6 +219,9 @@ class Slider extends LayerHolder{
     translate(cx, cy);
     super.MU();
   }
+  
+  int AU(){return 2;}
+  
 }
 
 class Rotor extends LayerHolder{
@@ -254,6 +259,8 @@ class Rotor extends LayerHolder{
     rotate(radians(cp));
     super.MU();
   }
+  
+  int AU(){return 2;}
   
 }
 
